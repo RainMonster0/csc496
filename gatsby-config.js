@@ -3,11 +3,17 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `CSCS496`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: `CSCS496 Project Site`,
   },
   plugins: [
     "gatsby-plugin-image",
-    "gatsby-plugin-sharp"
+    "gatsby-plugin-sharp",
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: `blog`,
+        path: `${__dirname}/blog`,
+      }
+    }
   ],
 };
