@@ -21,7 +21,7 @@ module.exports = {
       options: {
         typeName: "drupal",
         fieldName: "Drupal",
-        url: "https://csc496f22demo.tldr.dev/"
+        url: "https://csc496f22demo.tldr.dev/graphql"
       }
     },
   ],
