@@ -12,8 +12,13 @@ const pageTemplate = props => {
     return (
         <>
             <h4>{data.nodeFood?.title}</h4>
+            <p>{data.nodeFood?.mediaImage.mediaImage.url}</p>
+            <p>{data.nodeFood?.difficulty}</p>
             <p>{data.nodeFood?.cookingTime}</p>
             <p>{data.nodeFood?.preparationTime}</p>
+            <p>{data.nodeFood?.numberOfServings}</p>
+            <p>{data.nodeFood?.ingredients}</p>
+            <p>{data.nodeFood?.recipeInstruction.processed}</p>
             </>
     )}
 

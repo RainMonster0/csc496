@@ -27,7 +27,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 exports.createPages = ({ actions, graphql }) => {
     const { createPage } = actions
     return new Promise((resolve, reject) => {
-        // const articleTemplate = path.resolve('src/templates/node/article/index.js')
+        const articleTemplate = path.resolve('src/pages/article.js')
         const pageTemplate = path.resolve(`src/pages/recipe.js`)
 
         // page building queries
@@ -35,11 +35,11 @@ exports.createPages = ({ actions, graphql }) => {
         resolve(
             graphql(
                 `
-query MyQuery {
-    Drupal {
-                nodeRecipes(first: 100) {
-                    edges {
-                        node {
+                query MyQuery {
+                    Drupal {
+                      nodeRecipes(first: 100) {
+                        edges {
+                          node {
                             changed
                             id
                             cookingTime
@@ -49,12 +49,44 @@ query MyQuery {
                             title
                             preparationTime
                             numberOfServings
+                            ingredients
+                            recipeInstruction {
+                                processed
+                            }
+                            difficulty
+                            mediaImage{
+                                mediaImage {
+                                    url
+                                }
+                            }
+                          }
                         }
+                      }
+                      nodeArticles(first: 100) {
+                        edges {
+                          node {
+                            changed
+                            id
+                            author {
+                              displayName
+                            }
+                            path
+                            status
+                            title
+                            body {
+                                processed
+                            }
+                            mediaImage{
+                                mediaImage{
+                                    url
+                                }
+                            }
+                          }
+                        }
+                      }
                     }
-                }
-            }
-    }
-`
+                  }
+                `
             ).then(result => {
                 // shows during build/dev
                 // console.log("RESULT");
@@ -65,6 +97,7 @@ query MyQuery {
                 console.log("PAGES");
                 console.log(result.data.Drupal.nodeRecipes);
                 const pages = result.data.Drupal.nodeRecipes.edges;
+                const articlePages = result.data.Drupal.nodeArticles.edges;
 
                 //result.data.allNodeHorse.edges.forEach(({ node }, index) => {
                 pages.forEach(({ node }, index) => {
@@ -82,6 +115,22 @@ query MyQuery {
                             nid: node.id,
                             data: node,
                         },
+                    }),
+
+                articlePages.forEach(({ node }, index) => {
+                    console.log("PATH: ");
+                    console.log(node.path);
+                    const page_path = node.path
+                    console.log(page_path);
+
+                    createPage({
+                        path: `${page_path}`,
+                        component: articleTemplate,
+                        context: {
+                            nid:node.id,
+                            data: node,
+                        }
+                    })
                     })
                 })
             })
