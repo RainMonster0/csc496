@@ -1,5 +1,7 @@
 import { graphql } from 'gatsby'
 import React from 'react'
+import ListOfIngredients from '../components/ingredientsAndRecipe'
+import PrepInfo from '../components/preparationAndImage'
 
 const pageTemplate = props => {
     const data = {
@@ -8,17 +10,18 @@ const pageTemplate = props => {
 
     console.log(data);
     console.log(props);
+
+    data.nodeFood?.ingredients.forEach((i => console.log(i)))
+
+    const pageData = '<h1>' + data.nodeFood?.title + '</h1>';
     
     return (
         <>
-            <h4>{data.nodeFood?.title}</h4>
-            <p>{data.nodeFood?.mediaImage.mediaImage.url}</p>
-            <p>{data.nodeFood?.difficulty}</p>
-            <p>{data.nodeFood?.cookingTime}</p>
-            <p>{data.nodeFood?.preparationTime}</p>
-            <p>{data.nodeFood?.numberOfServings}</p>
-            <p>{data.nodeFood?.ingredients}</p>
-            <p>{data.nodeFood?.recipeInstruction.processed}</p>
+            <div dangerouslySetInnerHTML={{__html: pageData}}/>
+            <div>
+                <PrepInfo data={data}/>
+                <ListOfIngredients data={data}/>
+            </div>
             </>
     )}
 

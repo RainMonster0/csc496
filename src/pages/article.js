@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby'
 import React from 'react'
+import AuthorImageArticle from '../components/authorImageArticle'
 
 const pageTemplate = props => {
     const data = {
@@ -9,13 +10,15 @@ const pageTemplate = props => {
     console.log(data);
     console.log(props);
     
+    const pageData = '<h1>' + data.nodeArticle?.title + '</h1>';
+
     return (
         <>
-            <h4>{data.nodeArticle?.title}</h4>
-            <p>{data.nodeArticle?.author.displayName}</p>
-            <p>{data.nodeArticle?.body.processed}</p>
-            <p>{data.nodeArticle?.mediaImage.mediaImage.url}</p>
-            </>
+        <div dangerouslySetInnerHTML={{__html: pageData}}/>
+        <div>
+            <AuthorImageArticle data = {data}/>
+        </div>
+        </>
     )}
 
 export default pageTemplate

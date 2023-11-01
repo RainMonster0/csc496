@@ -28,3 +28,43 @@
     font-weight: 700;
     margin: 3rem 0;
 }
+
+.recipe-grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    width: 50%;
+}
+
+.recipe-instructions-container{
+    margin: left;
+    max-width: 1000px;
+    font-family: sans-serif;
+}
+
+.recipe-ingredients-container{
+    margin: left;
+    max-width: 200px;
+    font-family: sans-serif;
+    background-color: darksalmon;
+}
+
+.preparation-grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    width: 50%;
+}
+
+.preparation-info-container{
+    margin: center;
+    max-width: 250px;
+    font-family: sans-serif;
+}
+
+.author-image-container{
+    margin: left;
+    max-width: 750px;
+    font-family: sans-serif;
+}
+
